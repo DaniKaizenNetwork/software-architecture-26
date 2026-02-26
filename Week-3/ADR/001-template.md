@@ -36,27 +36,4 @@ Desde el punto de vista de Clean Code y SOLID, se observan violaciones al princi
 2. Aplicar únicamente parches de seguridad mínimos sin refactorizar el diseño.  
    Descartado porque no soluciona la deuda técnica ni los problemas de mantenibilidad a largo plazo.
 
-# Hallazgos de auditoría
 
-- **UserRepository.java**: SQL por concatenación, credenciales hardcodeadas y falta de cierre de recursos JDBC.
-- **AuthService.java**: uso de hashing MD5, exposición del hash en la respuesta y validación de contraseñas débil.
-- **AuthController.java**: envío de credenciales mediante query parameters.
-- **application.properties**: credenciales de base de datos expuestas.
-
-Ejemplo de respuesta insegura detectada en login válido:
-```json
-{
-  "ok": true,
-  "user": "admin",
-  "hash": "827ccb0eea8a706c4c34a16891f84e7b"
-}
-
-| # | Descripción del problema                         | Archivo                | Línea aprox. | Principio violado      | Riesgo |
-| - | ------------------------------------------------ | ---------------------- | ------------ | ---------------------- | ------ |
-| 1 | SQL construido por concatenación (SQL Injection) | UserRepository.java    | ~30–60       | Seguridad básica       | Alto   |
-| 2 | Credenciales de BD hardcodeadas                  | UserRepository.java    | ~10–20       | Seguridad / Clean Code | Alto   |
-| 3 | Hashing inseguro con MD5                         | AuthService.java       | ~20–40       | Seguridad              | Alto   |
-| 4 | Exposición del hash en la respuesta de login     | AuthService.java       | ~40–60       | Mínima exposición      | Alto   |
-| 5 | Credenciales enviadas en query params            | AuthController.java    | ~15–35       | Buenas prácticas HTTP  | Medio  |
-| 6 | Validación de contraseña insuficiente            | AuthService.java       | ~60–70       | Seguridad              | Medio  |
-| + | Credenciales expuestas en application.properties | application.properties | ~1–5         | Seguridad              | Alto   |
