@@ -6,7 +6,7 @@ Durante esta fase se verificó que todos los servicios definidos en el entorno d
 Como criterio de validación, se comprobó el correcto funcionamiento del endpoint de salud del sistema, confirmando que la aplicación responde de manera satisfactoria y se encuentra operativa.
 
 **Resultado:** Levantamiento del ambiente exitoso.
-
+{"ok":true}
 ---
 
 # FASE 2 — Auditoría del código
