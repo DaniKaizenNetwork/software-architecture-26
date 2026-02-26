@@ -18,18 +18,19 @@ A continuación, se presentan los principales hallazgos detectados durante la au
 
 ## Tabla de Hallazgos — Auditoría Clean Code y Seguridad
 
-| # | Descripción del problema                                                                 | Archivo               | Línea aprox. | Principio violado                                   | Riesgo |
-|---|-------------------------------------------------------------------------------------------|-----------------------|--------------|----------------------------------------------------|--------|
-| 1 | Construcción de consultas SQL mediante concatenación de strings, permitiendo SQL Injection | UserRepository.java   | ~20          | Seguridad básica (SQL Injection)                   | Alto   |
-| 2 | Inserción de datos en base de datos usando SQL concatenado con input del usuario          | UserRepository.java   | ~34          | Seguridad básica (SQL Injection)                   | Alto   |
-| 3 | Uso de MD5 para hashing de contraseñas, algoritmo obsoleto y criptográficamente inseguro  | AuthService.java      | ~63          | Seguridad básica (hashing débil)                   | Alto   |
-| 4 | Exposición del hash de la contraseña en la respuesta del endpoint de login                | AuthService.java      | ~28 y ~35    | Principio de mínima exposición de datos            | Alto   |
-| 5 | Credenciales de base de datos definidas directamente en el código fuente                  | UserRepository.java   | ~12–14       | Seguridad / Clean Code                             | Alto   |
-| 6 | Atributos públicos en la entidad `User`, rompiendo el encapsulamiento                     | User.java             | ~4–6         | Clean Code / Programación Orientada a Objetos     | Medio  |
-| 7 | Uso de nombres de parámetros poco descriptivos (`u`, `p`, `e`) en el controlador          | AuthController.java   | ~20 y ~27    | Naming (Clean Code)                                | Bajo   |
-| 8 | Acceso directo a la base de datos sin una capa de abstracción adecuada                    | UserRepository.java   | ~17          | SRP / DIP (SOLID)                                  | Medio  |
-| 9 | Falta de cierre de conexiones, Statements y ResultSet, generando posibles fugas de recursos| UserRepository.java   | ~16–29       | Buenas prácticas / Manejo de recursos              | Medio  |
-|10 | Validación de contraseñas extremadamente débil (solo longitud mayor a 3 caracteres)      | AuthService.java      | ~44          | Seguridad básica                                   | Medio  |
+| #  | Descripción del problema                                                                    | Archivo             | Línea aprox. | Principio violado                             | Riesgo |
+| -- | ------------------------------------------------------------------------------------------- | ------------------- | ------------ | --------------------------------------------- | ------ |
+| 1  | Construcción de consultas SQL mediante concatenación de strings, permitiendo SQL Injection  | UserRepository.java | ~32–48       | Seguridad básica (SQL Injection)              | Alto   |
+| 2  | Inserción de datos en base de datos usando SQL concatenado con input del usuario            | UserRepository.java | ~52–70       | Seguridad básica (SQL Injection)              | Alto   |
+| 3  | Uso de MD5 para hashing de contraseñas, algoritmo obsoleto y criptográficamente inseguro    | AuthService.java    | ~41–56       | Seguridad básica (hashing débil)              | Alto   |
+| 4  | Exposición del hash de la contraseña en la respuesta del endpoint de login                  | AuthService.java    | ~58 y ~66    | Principio de mínima exposición de datos       | Alto   |
+| 5  | Credenciales de base de datos definidas directamente en el código fuente                    | UserRepository.java | ~8–15        | Seguridad / Clean Code                        | Alto   |
+| 6  | Atributos públicos en la entidad `User`, rompiendo el encapsulamiento                       | User.java           | ~6–11        | Clean Code / Programación Orientada a Objetos | Medio  |
+| 7  | Uso de nombres de parámetros poco descriptivos (`u`, `p`, `e`) en el controlador            | AuthController.java | ~22 y ~31    | Naming (Clean Code)                           | Bajo   |
+| 8  | Acceso directo a la base de datos sin una capa de abstracción adecuada                      | UserRepository.java | ~18–26       | SRP / DIP (SOLID)                             | Medio  |
+| 9  | Falta de cierre de conexiones, Statements y ResultSet, generando posibles fugas de recursos | UserRepository.java | ~34–82       | Buenas prácticas / Manejo de recursos         | Medio  |
+| 10 | Validación de contraseñas extremadamente débil (solo longitud mayor a 3 caracteres)         | AuthService.java    | ~69–76       | Seguridad básica                              | Medio  |
+                             | Medio  |
 
 # FASE 3 — Pruebas Funcionales
 
